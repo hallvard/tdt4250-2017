@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="ASCII"?>
-<org.eclipse.emf.ecp.view.model:View xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.eclipse.emf.ecp.view.model="http://org/eclipse/emf/ecp/view/model/170" xmi:id="_twjhoML4EeeYYvmui3p9rh" name="GameConfig" ecorePath="/no.hal.pg.config/model/config.ecore">
-  <rootEClass href="../../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<org.eclipse.emf.ecp.view.model:View xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.eclipse.emf.ecp.view.model="http://org/eclipse/emf/ecp/view/model/1180" xmi:id="_hUIUsOT9EemggJT01eTwKw" name="GameConfig">
+  <rootEClass href="../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig"/>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_hUMmIOT9EemggJT01eTwKw" name="Control tasks">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_hUMmIeT9EemggJT01eTwKw">
+      <domainModelEFeature xsi:type="ecore:EReference" href="../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig/tasks"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_hUMmIuT9EemggJT01eTwKw" name="Control players">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_hUMmI-T9EemggJT01eTwKw">
+      <domainModelEFeature xsi:type="ecore:EReference" href="../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig/players"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_hUMmJOT9EemggJT01eTwKw" name="Control items">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_hUMmJeT9EemggJT01eTwKw">
+      <domainModelEFeature xsi:type="ecore:EReference" href="../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig/items"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_hUMmJuT9EemggJT01eTwKw" name="Control taskProxies">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_hUMmJ-T9EemggJT01eTwKw">
+      <domainModelEFeature xsi:type="ecore:EReference" href="../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig/taskProxies"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_hUMmKOT9EemggJT01eTwKw" name="Control itemProxies">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_hUMmKeT9EemggJT01eTwKw">
+      <domainModelEFeature xsi:type="ecore:EReference" href="../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig/itemProxies"/>
+    </domainModelReference>
+  </children>
+  <children xsi:type="org.eclipse.emf.ecp.view.model:Control" xmi:id="_hUMmKuT9EemggJT01eTwKw" name="Control locations">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.model:FeaturePathDomainModelReference" xmi:id="_hUMmK-T9EemggJT01eTwKw">
+      <domainModelEFeature xsi:type="ecore:EReference" href="../../plugin/no.hal.pg.config/model/config.ecore#//GameConfig/locations"/>
+    </domainModelReference>
+  </children>
+  <ecorePaths>/no.hal.pg.config/model/config.ecore</ecorePaths>
 </org.eclipse.emf.ecp.view.model:View>

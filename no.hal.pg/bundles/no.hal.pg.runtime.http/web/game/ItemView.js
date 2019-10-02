@@ -10,7 +10,6 @@ this.props:
  */
 
 var md = new Remarkable();
-md.renderer = new Renderer()
 
 class ItemView extends React.Component {
 

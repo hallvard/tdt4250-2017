@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension point="org.eclipse.ui.editors">
+   
+	<extension point="org.eclipse.ui.editors">
       	<editor class="org.eclipse.emfforms.spi.editor.GenericEditor"
       		id="no.hal.pg.config.viewmodel"
       		name="Pg Game configuration editor"
@@ -10,11 +11,7 @@
       		>
     		</editor>
     </extension>
-
-   <extension point="org.eclipse.emf.ecp.view.model.provider.xmi.file">
-		<file filePath="viewmodels/GameConfig.view"/>
-   </extension>
-
+    
    <extension point="org.eclipse.ui.newWizards">
       <!-- @generated config NOT -->
       <category
@@ -37,6 +34,18 @@
             uri="platform:/plugin/no.hal.pg.config.editor/model/viewmodel.ecore"
             class="no.hal.pg.config.viewmodel.ViewmodelPackage"
             genModel="model/viewmodel.genmodel"/>
+   </extension>
+
+	<extension  point="org.eclipse.emf.ecp.view.model.provider.xmi.file">
+		<file filePath="viewmodels/GameConfig.view"/>
+	</extension>
+
+   <extension point="org.eclipse.emfforms.editor.toolbarActions">
+   		<action toolbarAction="no.hal.pg.config.actions.LoadResourceToolbarAction"/>
+   </extension>
+
+   <extension point="org.eclipse.emfforms.editor.toolbarActions">
+   		<action toolbarAction="no.hal.pg.config.actions.CreateGameToolbarAction"/>
    </extension>
 
 </plugin>

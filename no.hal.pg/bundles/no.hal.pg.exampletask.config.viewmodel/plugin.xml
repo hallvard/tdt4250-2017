@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension point="org.eclipse.emf.ecp.view.model.provider.xmi.file">
-		<file filePath="viewmodels/ExampleTaskConfig.view"/>
-   </extension>
+   
    
    <extension point="org.eclipse.emfforms.editor.toolbarActions">
-   		<action name="AddExampleTaskToolbarAction" toolbarAction="no.hal.pg.exampletask.config.actions.AddExampleTaskToolbarAction"/>
+   		<action toolbarAction="no.hal.pg.exampletask.config.actions.AddExampleTaskToolbarAction"/>
    </extension>
 
+
+<extension  point="org.eclipse.emf.ecp.view.model.provider.xmi.file">
+<file filePath="viewmodels/ExampleTaskConfig.view"/>
+</extension>
 </plugin>

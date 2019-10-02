@@ -14,7 +14,6 @@ this.state:
  */
 
 var md = new Remarkable();
-md.renderer = new Renderer()
 
 class TaskView extends React.Component {
 

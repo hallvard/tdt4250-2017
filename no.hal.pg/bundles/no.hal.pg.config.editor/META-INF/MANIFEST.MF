@@ -2,6 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: no.hal.pg.config.editor;singleton:=true
+Automatic-Module-Name: no.hal.pg.config.editor
 Bundle-Version: 0.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: no.hal.pg.config.presentation.ConfigEditorPlugin$Implementation
@@ -17,6 +18,8 @@ Require-Bundle: org.eclipse.emf.ecp.edit.swt,
  org.eclipse.emf.edit;bundle-version="[2.8.0,3.0.0)",
  org.eclipse.core.databinding.property;bundle-version="[1.4.0,2.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.8.0,4.0.0)",
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecp.view.model;visibility:=reexport,
  org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
@@ -28,8 +31,9 @@ Require-Bundle: org.eclipse.emf.ecp.edit.swt,
  org.eclipse.emfforms.swt.core.di,
  org.eclipse.emfforms.editor;bundle-version="1.14.0",
  no.hal.pg.config;bundle-version="0.0.1",
- org.eclipse.ui.ide;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+ org.eclipse.ui.ide;visibility:=reexport,
+ org.eclipse.emfforms.view.annotation.model;bundle-version="1.17.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.inject;version="1.0.0",
  no.hal.pg.http,
  no.hal.pg.http.impl,
@@ -47,4 +51,7 @@ Import-Package: javax.inject;version="1.0.0",
  org.osgi.service.component.annotations;version="1.3.0"
 Export-Package: no.hal.pg.config.actions,
  no.hal.pg.config.presentation,
- no.hal.pg.config.viewmodel
+ no.hal.pg.config.viewmodel,
+ no.hal.pg.config.viewmodel.impl,
+ no.hal.pg.config.viewmodel.util
+Service-Component: OSGI-INF/no.hal.pg.config.viewmodel.BooleanComboViewerSWTRendererService.xml

@@ -30,13 +30,13 @@
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
-<!--
-   <extension point="org.eclipse.emfforms.editor.toolbarActions">
-   		<action name="LoadResource" toolbarAction="no.hal.pg.config.actions.LoadResourceToolbarAction"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated viewmodel -->
+      <package
+            uri="platform:/plugin/no.hal.pg.config.editor/model/viewmodel.ecore"
+            class="no.hal.pg.config.viewmodel.ViewmodelPackage"
+            genModel="model/viewmodel.genmodel"/>
    </extension>
--->
-   <extension point="org.eclipse.emfforms.editor.toolbarActions">
-   		<action name="CreateGameToolbarAction" toolbarAction="no.hal.pg.config.actions.CreateGameToolbarAction"/>
-   </extension>
-   	
+
 </plugin>

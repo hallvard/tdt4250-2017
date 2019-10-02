@@ -31,14 +31,18 @@ public class BooleanComboViewerSWTRenderer extends SimpleControlJFaceViewerSWTRe
 			xvLabels = { "x", "v" },
 			yesNoLabels = { "No", "Yes" }
 	;
-	
+
 	private String[] booleanLabels = yesNoLabels;
-	
-	public void setTrueFalseLabels(Collection<String> labels) {
-		booleanLabels = labels.toArray(new String[labels.size()]);
+
+	public void setTrueFalseLabels(final String... trueFalseLabels) {
+		booleanLabels = new String[]{trueFalseLabels[1], trueFalseLabels[0]};
 	}
 
-	protected String getBooleanLabel(Object element) {
+	public void setTrueFalseLabels(final Collection<String> labels) {
+		setTrueFalseLabels(labels.toArray(new String[labels.size()]));
+	}
+
+	protected String getBooleanLabel(final Object element) {
 		return element instanceof Boolean ? booleanLabels[((Boolean) element).booleanValue() ? 1 : 0] : "";
 	}
 
@@ -56,20 +60,28 @@ public class BooleanComboViewerSWTRenderer extends SimpleControlJFaceViewerSWTRe
 	 * @param emfFormsEditSupport The {@link EMFFormsEditSupport}
 	 */
 	@Inject
-	public BooleanComboViewerSWTRenderer(VControl vElement, ViewModelContext viewContext,
-		ReportService reportService, EMFFormsDatabinding emfFormsDatabinding, EMFFormsLabelProvider emfFormsLabelProvider,
-		VTViewTemplateProvider vtViewTemplateProvider, EMFFormsEditSupport emfFormsEditSupport) {
+	public BooleanComboViewerSWTRenderer(final VControl vElement, final ViewModelContext viewContext,
+			final ReportService reportService, final EMFFormsDatabinding emfFormsDatabinding, final EMFFormsLabelProvider emfFormsLabelProvider,
+			final VTViewTemplateProvider vtViewTemplateProvider, final EMFFormsEditSupport emfFormsEditSupport) {
 		super(vElement, viewContext, reportService, emfFormsDatabinding, emfFormsLabelProvider, vtViewTemplateProvider);
 		this.emfFormsEditSupport = emfFormsEditSupport;
+		final String labels = BooleanComboViewerSWTRendererService.getAnnotationValue(vElement, "labels", null);
+		if (labels != null) {
+			setTrueFalseLabels(labels.split(" "));
+		}
+		final BooleanComboRendererConfig rendererConfig = BooleanComboViewerSWTRendererService.getAttachment(vElement, BooleanComboRendererConfig.class);
+		if (rendererConfig != null) {
+			setTrueFalseLabels(rendererConfig.getTrueFalseLabels());
+		}
 	}
 
 	@Override
-	protected Binding[] createBindings(Viewer viewer) throws DatabindingFailedException {
+	protected Binding[] createBindings(final Viewer viewer) throws DatabindingFailedException {
 		final Binding binding = getDataBindingContext().bindValue(ViewersObservables.observeSingleSelection(viewer),
-			getModelValue());
+				getModelValue());
 		final Binding tooltipBinding = getDataBindingContext().bindValue(
-			WidgetProperties.tooltipText().observe(viewer.getControl()),
-			getModelValue());
+				WidgetProperties.tooltipText().observe(viewer.getControl()),
+				getModelValue());
 		return new Binding[] { binding, tooltipBinding };
 	}
 
@@ -79,14 +91,14 @@ public class BooleanComboViewerSWTRenderer extends SimpleControlJFaceViewerSWTRe
 	 * @see org.eclipse.emf.ecp.view.spi.core.swt.SimpleControlJFaceViewerSWTRenderer#createJFaceViewer(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
-	protected Viewer createJFaceViewer(Composite parent) throws DatabindingFailedException {
-		ComboViewer combo = new ComboViewer(parent);
+	protected Viewer createJFaceViewer(final Composite parent) throws DatabindingFailedException {
+		final ComboViewer combo = new ComboViewer(parent);
 		combo.setContentProvider(new ArrayContentProvider());
 		combo.setLabelProvider(new LabelProvider() {
 			@Override
-			public String getText(Object element) {
+			public String getText(final Object element) {
 				return getBooleanLabel(element);
-//				return getEMFFormsEditSupport().getText(getVElement().getDomainModelReference(), getViewModelContext().getDomainModel(), element);
+				//				return getEMFFormsEditSupport().getText(getVElement().getDomainModelReference(), getViewModelContext().getDomainModel(), element);
 			}
 		});
 		combo.setInput(Arrays.asList(Boolean.FALSE, Boolean.TRUE));

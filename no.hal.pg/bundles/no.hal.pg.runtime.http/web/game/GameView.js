@@ -54,7 +54,7 @@ class GameView extends React.Component {
       		React.createElement("tbody", null, taskRows)
     		);
 
-  		var itemRows = this.state.itemViews.map(function(item, idx) {
+  		var itemRows = (this.state.itemViews == undefined ? [] : this.state.itemViews.map(function(item, idx) {
       		return React.createElement(
           		"tr", { key: idx },
     	    			React.createElement(
@@ -62,7 +62,7 @@ class GameView extends React.Component {
     		    			React.createElement(ItemView, { dataUrl: dataUrl + '/itemViews/' + idx, item: item, itemNum: (idx + 1) })
     	 			)
           	);
-  		});
+  		}));
     		var itemList = React.createElement(
       		"table", { className: "itemList" },
       		React.createElement("tbody", null, itemRows)
@@ -70,9 +70,11 @@ class GameView extends React.Component {
 
 	    	return React.createElement("div", { className: "game" },
 	    		React.createElement("table", null,
-	    			React.createElement("tr", null,
-	    				React.createElement("td", null, React.createElement("h2", null, "Tasks"), taskList),
-	    				React.createElement("td", null, React.createElement("h2", null, "Items"), itemList),
+		    		React.createElement("table", null,
+		    			React.createElement("tr", null,
+		    				React.createElement("td", null, React.createElement("h2", null, "Tasks"), taskList),
+	    					React.createElement("td", null, React.createElement("h2", null, "Items"), itemList),
+					)
 				)
 			)
     		);

@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.emf.ecp.edit.swt,
  no.hal.pg.exampletask.config;bundle-version="0.0.1",
  org.eclipse.jface,
  org.eclipse.emfforms.editor;bundle-version="1.14.1"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: javax.inject;version="1.0.0",
  no.hal.pg.config.actions,
  no.hal.pg.config.viewmodel,

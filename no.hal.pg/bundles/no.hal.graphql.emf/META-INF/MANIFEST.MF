@@ -12,5 +12,5 @@ Bundle-ClassPath: target/dependency/antlr4-runtime.jar,
  target/dependency/graphql-java.jar,
  target/dependency/slf4j-api.jar,
  .
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

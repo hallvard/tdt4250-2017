@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.window.Window;
@@ -59,27 +60,6 @@ public class CreateGameToolbarAction extends ConfigToolbarAction {
 			
 			@Override
 			public void run(GameConfig gameConfig) {
-//				InputDialog inputDialog = new InputDialog(null, "Player count", "Enter the number of players", "3", new IInputValidator() {
-//					@Override
-//					public String isValid(String newText) {
-//						try {
-//							Integer.valueOf(newText);
-//							return null;
-//						} catch (NumberFormatException e) {
-//							return e.getMessage();
-//						}
-//					}
-//				});
-//				if (inputDialog.open() != Window.OK) {
-//					return;
-//				}
-//				int playerCount = Integer.valueOf(inputDialog.getValue());
-//				Collection<Player> players = new ArrayList<>(playerCount);
-//				for (int i = 0; i < playerCount; i++) {
-//					Player player = RuntimeFactory.eINSTANCE.createPlayer();
-//					player.setNickname("p" + (i + 1));
-//					players.add(player);
-//				}
 				ResourceDialog resourceDialog = new ResourceDialog(null, "ARC model", SWT.OPEN | SWT.SINGLE);
 				if (resourceDialog.open() != Window.OK) {
 					return;
@@ -105,24 +85,33 @@ public class CreateGameToolbarAction extends ConfigToolbarAction {
 					IPath path = new Path(gameUri.toString().substring(URI.createPlatformResourceURI("", true).toString().length()));  
 					IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-					IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(gameUri.lastSegment());
 					try {
-						IEditorPart gameEditor = page.openEditor(new FileEditorInput(file), desc.getId());
 						EditorResourceProvidersView view = (EditorResourceProvidersView) page.showView("no.hal.pg.ui.EditorResourceProvidersView");
+						FileEditorInput editorInput = new FileEditorInput(file);
+						boolean alreadyOpen = page.findEditor(editorInput) != null; 
+						IEditorPart gameEditor = page.openEditor(editorInput, "org.eclipse.emf.ecore.presentation.ReflectiveEditorID");
 						view.partActivated(gameEditor);
-						view.registerResourceProvider(gameEditor);
-						String port = System.getProperty("org.osgi.service.http.port");
-						if (port != null) {
-							int gameNum = 0;
-							for (Player player : players) {
-								final IWebBrowser browser = PlatformUI.getWorkbench().getBrowserSupport().createBrowser(player.getName() + "@" + gameUri.toString());
-								URL url = new URL("http://localhost:" + port + "/app/" + ResourceProvider.defaultName(gameUri) + "/views/" + gameNum);
-								browser.openURL(url);
-								gameNum++;
+						try {
+							view.registerResourceProvider(gameEditor);
+							String port = System.getProperty("org.osgi.service.http.port");
+							if (port != null) {
+								int gameNum = 0;
+								for (Player player : players) {
+									final IWebBrowser browser = PlatformUI.getWorkbench().getBrowserSupport().createBrowser(player.getName() + "@" + gameUri.toString());
+									URL url = new URL("http://localhost:" + port + "/app/" + ResourceProvider.defaultName(gameUri) + "/views/" + gameNum);
+									browser.openURL(url);
+									gameNum++;
+								}
+							}
+						} catch (RuntimeException e) {
+							// wrong kind of editor
+							if (! alreadyOpen) {
+								view.partDeactivated(gameEditor);
+								page.closeEditor(gameEditor, false);
 							}
 						}
-					} catch (PartInitException pie) {
-					} catch (MalformedURLException mue) {
+					} catch (PartInitException | MalformedURLException e) {
+						MessageDialog.openError(null, "Exception", e.getMessage());
 					}
 				}
 			}

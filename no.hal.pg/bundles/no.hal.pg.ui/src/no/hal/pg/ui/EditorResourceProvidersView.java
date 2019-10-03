@@ -192,11 +192,12 @@ public class EditorResourceProvidersView extends AbstractSelectionView {
 
 	public void registerResourceProvider(IWorkbenchPart part) {
 		IEditingDomainProvider editingDomainProvider = getAdapter(part, IEditingDomainProvider.class);
-		if (resourceProviders.containsKey(editingDomainProvider)) {
-			registerResourceProvider(editingDomainProvider);
+		if (editingDomainProvider == null) {
+			throw new IllegalArgumentException("Couldn't register " + part.getTitle() + " part, since it doesn't provide an EMF instance (isn't an IEditingDomainProvider)");
 		}
+		registerResourceProvider(editingDomainProvider);
 	}
-	
+
 	protected void registerResourceProvider(IEditingDomainProvider editingDomainProvider) {
 		ResourceProvider resourceProvider = resourceProviders.get(editingDomainProvider);
 		if (resourceProvider != null && (! resourceRegistrations.containsKey(resourceProvider))) {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arc:Arc xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:arc="platform:/plugin/no.hal.pg.arc/model/arc.ecore">
+  <actors xsi:type="arc:Person" name="Hallvard Trætteberg">
+    <ids>hal@ntnu.no</ids>
+  </actors>
+  <actors xsi:type="arc:Person" name="Ola Nordmann">
+    <ids>hal@ntnu.no</ids>
+    <ids>ola.nordmann@gmail.com</ids>
+  </actors>
+</arc:Arc>

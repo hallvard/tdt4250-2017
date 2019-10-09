@@ -95,12 +95,16 @@ public class AppServlet extends AbstractResourceServlet implements Servlet {
 		if (mainLocation == null) {
 			throw new ServletException("No app location for " + object);
 		}
-		String location = req.getServletContext().getContextPath();
-		location = location + mainLocation + "?dataUrl=";
-		location = location + "/data/" + requestData.resourceProvider.getName();
-		for (String segment : requestData.resourcePath) {
-			location = location + "/" + segment;
+		String queryString = req.getQueryString();
+		if (queryString == null) {
+			queryString = "";
+		} else {
+			queryString += "&";			
 		}
-		resp.sendRedirect(location);
+		queryString += "dataUrl=/data/" + requestData.resourceProvider.getName();
+		for (String segment : requestData.resourcePath) {
+			queryString += "/" + segment;
+		}
+		resp.sendRedirect(req.getServletContext().getContextPath() + mainLocation + "?" + queryString);
 	}
 }

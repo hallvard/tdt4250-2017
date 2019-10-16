@@ -146,6 +146,10 @@ public class TaskViewImpl<T extends Task<?>> extends View1Impl<Player, T> implem
 		return this;
 	}
 
+	protected boolean isActive() {
+		return isStarted() && (! isFinished());
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

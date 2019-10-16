@@ -47,8 +47,19 @@ var AppUtils = {
 	    return props;
 	},
 
-	appUrl: function(dataUrl) {
-		return dataUrl.replace("/data/", "/app/");
+	appUrl: function(dataUrl, appProps) {
+		var query = null;
+		for (var prop in appProps) {
+			if (query == null) {
+				query = "?"
+			} else {
+				query += "&";
+			}
+			query += prop + "=" + appProps[prop];
+		}
+		var baseUrl = dataUrl.replace("/data/", "/app/");
+		var url = (query != null ? baseUrl += query : baseUrl);
+		return url;
 	},
 
 	resolveUrl(relativeUrl) {

@@ -27,15 +27,16 @@ class TaskView extends React.Component {
 	}
 
   	render() {
-  		var divClass = "task";
+		var taskState = null;
   		if (this.state.task.finished) {
-  			divClass = "finishedTask";
+  			taskState = "finished";
   		} else if (this.state.task.started) {
-  			divClass = "startedTask";
+  			taskState = "started";
   		} else if (this.state.task.enabled) {
-  			divClass = "enabledTask";
+  			taskState = "enabled";
   		}
-  		var taskLink = AppUtils.appUrl(this.props.dataUrl);
+  		var divClass = (taskState == null ? "task" : taskState + "Task");
+  		var taskLink = AppUtils.appUrl(this.props.dataUrl, { taskState: taskState });
 	    	return React.createElement(
       		"div", { className: divClass },
       		React.createElement(

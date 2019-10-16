@@ -65,14 +65,13 @@ class GameView extends React.Component {
     	);
     	return React.createElement("div", { className: "game" },
     		React.createElement("table", null,
-	    		React.createElement("table", null,
-		    		React.createElement("tbody", null,
-		    			React.createElement("tr", null,
-		    				React.createElement("td", null, React.createElement("h2", null, "Tasks"), taskList),
-    						React.createElement("td", null, React.createElement("h2", null, "Items"), itemList),
-						)
+	    		React.createElement("tbody", null,
+	    			React.createElement("tr", null,
+	    				React.createElement("td", null, React.createElement("h2", null, "Tasks"), taskList),
+						React.createElement("td", null, React.createElement("h2", null, "Items"), itemList)
 					)
 				)
-			);
+			)
+		);
   	}
 }
